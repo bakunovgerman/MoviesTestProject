@@ -1,5 +1,9 @@
 package com.example.moviestestproject.features.movies_with_filters.presentation.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class MoviePresentationModel(
     val description: String? = null,
     val genres: List<String>?,
@@ -9,4 +13,4 @@ data class MoviePresentationModel(
     val name: String?,
     val rating: Double?,
     val year: Int?
-)
+) : Parcelable

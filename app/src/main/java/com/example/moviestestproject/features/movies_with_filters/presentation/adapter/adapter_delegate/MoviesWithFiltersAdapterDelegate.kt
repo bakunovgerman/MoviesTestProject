@@ -5,10 +5,7 @@ import com.example.moviestestproject.databinding.ItemGenreLayoutBinding
 import com.example.moviestestproject.databinding.ItemMoviesListLayoutBinding
 import com.example.moviestestproject.databinding.ItemTitleSectionLayoutBinding
 import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.MoviesAdapter
-import com.example.moviestestproject.features.movies_with_filters.presentation.models.GenrePresentationModel
-import com.example.moviestestproject.features.movies_with_filters.presentation.models.MovieWrapperPresentationModel
-import com.example.moviestestproject.features.movies_with_filters.presentation.models.MoviesWithGenres
-import com.example.moviestestproject.features.movies_with_filters.presentation.models.TitleSectionPresentationModel
+import com.example.moviestestproject.features.movies_with_filters.presentation.models.*
 import com.example.moviestestproject.features.movies_with_filters.presentation.utils.MoviesGridSpacingItemDecoration
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
@@ -54,7 +51,7 @@ fun genresFiltersAdapterDelegate(clickCallback: (Long, String, Boolean) -> Unit)
     }
 
 private const val BOTTOM_SPACE_GRID = 20
-fun moviesAdapterDelegate() =
+fun moviesAdapterDelegate(clickMovieCallback: (MoviePresentationModel) -> Unit) =
     adapterDelegateViewBinding<MovieWrapperPresentationModel, MoviesWithGenres, ItemMoviesListLayoutBinding>(
         { layoutInflater, root ->
             ItemMoviesListLayoutBinding.inflate(
@@ -71,7 +68,7 @@ fun moviesAdapterDelegate() =
         }
     ) {
 
-        val moviesAdapter = MoviesAdapter()
+        val moviesAdapter = MoviesAdapter(clickMovieCallback = clickMovieCallback)
         binding.moviesRecyclerView.adapter = moviesAdapter
 
         bind {

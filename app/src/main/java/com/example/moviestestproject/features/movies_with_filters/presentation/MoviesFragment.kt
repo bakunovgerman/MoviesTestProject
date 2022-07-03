@@ -3,14 +3,16 @@ package com.example.moviestestproject.features.movies_with_filters.presentation
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.moviestestproject.R
 import com.example.moviestestproject.databinding.FragmentMoviesBinding
+import com.example.moviestestproject.features.movie_detail.presentation.MovieDetailFragment
+import com.example.moviestestproject.features.movie_detail.presentation.MovieDetailFragment.Companion.MOVIE_DETAIL_FRAGMENT
 import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate.MoviesWithFiltersListDelegationAdapter
 import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate.genresFiltersAdapterDelegate
 import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate.moviesAdapterDelegate
 import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate.titleSectionAdapterDelegate
+import com.example.moviestestproject.features.movies_with_filters.presentation.models.MoviePresentationModel
 import com.example.moviestestproject.features.movies_with_filters.presentation.models.UiState
 import com.example.moviestestproject.features.movies_with_filters.presentation.mvp.MoviesPresenter
 import com.example.moviestestproject.features.movies_with_filters.presentation.mvp.MoviesView
@@ -28,7 +30,9 @@ class MoviesFragment : MvpAppCompatFragment(R.layout.fragment_movies), MoviesVie
         genresFiltersAdapterDelegate { id, name, isSelected ->
             moviePresenter.clickGenreFilter(idGenre = id, nameGenre = name, isSelected = isSelected)
         },
-        moviesAdapterDelegate()
+        moviesAdapterDelegate() { movie ->
+            navigateToMovieDetail(movie)
+        }
     )
 
     @Inject
@@ -67,6 +71,13 @@ class MoviesFragment : MvpAppCompatFragment(R.layout.fragment_movies), MoviesVie
 
     override fun showError(errorMessage: String) {
         binding.errorLayout.visibility = View.VISIBLE
+    }
+
+    private fun navigateToMovieDetail(movie: MoviePresentationModel) {
+        parentFragmentManager.beginTransaction()
+            .add(R.id.fragmentContainerView, MovieDetailFragment.newInstance(movieDetail = movie))
+            .addToBackStack(MOVIE_DETAIL_FRAGMENT)
+            .commit()
     }
 
     companion object {
