@@ -9,8 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class MoviesRepositoryImpl(private val moviesService: MoviesService) : MoviesRepository {
+class MoviesRepositoryImpl @Inject constructor(private val moviesService: MoviesService) :
+    MoviesRepository {
 
     override suspend fun getMovies(): Flow<Result<MoviesResponse>> = flow {
         val result = apiRequest { moviesService.getMovies() }

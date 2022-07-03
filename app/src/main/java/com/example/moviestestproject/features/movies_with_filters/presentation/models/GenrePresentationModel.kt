@@ -1,5 +1,9 @@
 package com.example.moviestestproject.features.movies_with_filters.presentation.models
 
-import com.example.moviestestproject.features.movies_with_filters.domain.models.GenreDomain
-
-data class GenrePresentationModel(val items: List<GenreDomain>): MoviesWithGenres
+data class GenrePresentationModel(
+    val id: Long,
+    val name: String,
+    val isSelected: Boolean = false
+) : MoviesWithGenres {
+    override val idItem: Long = id
+}

@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateMovieWithFiltersFragment() {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.fragmentContainerView, MoviesFragment.newInstance() as Fragment)
-//            .commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainerView, MoviesFragment.newInstance())
+            .commit()
     }
 }

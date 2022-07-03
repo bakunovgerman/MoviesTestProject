@@ -1,12 +1,17 @@
 package com.example.moviestestproject.features.movies_with_filters.domain.usecases
 
-import com.example.moviestestproject.features.movies_with_filters.data.models.Movie
 import com.example.moviestestproject.features.movies_with_filters.domain.models.GenreDomain
+import com.example.moviestestproject.features.movies_with_filters.domain.models.MovieDomain
+import javax.inject.Inject
 
-class GetGenresListUseCase {
+interface GetGenresListUseCase {
+    operator fun invoke(moviesList: List<MovieDomain>): List<GenreDomain>
+}
 
-    operator fun invoke(moviesList: List<Movie>): List<GenreDomain> {
-        var id = 1
+class GetGenresListUseCaseImpl @Inject constructor() : GetGenresListUseCase {
+
+    override operator fun invoke(moviesList: List<MovieDomain>): List<GenreDomain> {
+        var id = 1L
         val genresList = mutableListOf<GenreDomain>()
         moviesList.forEach { movie ->
             movie.genres?.forEach { genreName ->

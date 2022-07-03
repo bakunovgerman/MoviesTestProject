@@ -1,6 +1,6 @@
-package com.example.moviestestproject.features.movies_with_filters.presentation.models
+package com.example.moviestestproject.features.movies_with_filters.domain.models
 
-data class MoviePresentationModel(
+data class MovieDomain(
     val description: String? = null,
     val genres: List<String>?,
     val id: Long?,

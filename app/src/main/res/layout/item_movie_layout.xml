@@ -12,7 +12,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/imageNotFoundOrError"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/gray"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="@string/image_not_found"/>
 
     <TextView
         android:id="@+id/movieTitleTextView"
@@ -26,6 +40,6 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:maxLines="2"
-        android:background="@color/gray05" />
+        android:background="@color/black_05" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

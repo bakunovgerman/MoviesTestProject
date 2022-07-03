@@ -1,18 +1,21 @@
 package com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate
 
-import com.example.moviestestproject.databinding.ItemGenresFiltersLayoutBinding
+import com.example.moviestestproject.R
+import com.example.moviestestproject.databinding.ItemGenreLayoutBinding
 import com.example.moviestestproject.databinding.ItemMoviesListLayoutBinding
-import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.GenresAdapter
+import com.example.moviestestproject.databinding.ItemTitleSectionLayoutBinding
 import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.MoviesAdapter
 import com.example.moviestestproject.features.movies_with_filters.presentation.models.GenrePresentationModel
-import com.example.moviestestproject.features.movies_with_filters.presentation.models.MoviePresentationModel
+import com.example.moviestestproject.features.movies_with_filters.presentation.models.MovieWrapperPresentationModel
 import com.example.moviestestproject.features.movies_with_filters.presentation.models.MoviesWithGenres
+import com.example.moviestestproject.features.movies_with_filters.presentation.models.TitleSectionPresentationModel
+import com.example.moviestestproject.features.movies_with_filters.presentation.utils.MoviesGridSpacingItemDecoration
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
-fun genresFiltersAdapterDelegate() =
-    adapterDelegateViewBinding<GenrePresentationModel, MoviesWithGenres, ItemGenresFiltersLayoutBinding>(
+fun titleSectionAdapterDelegate() =
+    adapterDelegateViewBinding<TitleSectionPresentationModel, MoviesWithGenres, ItemTitleSectionLayoutBinding>(
         { layoutInflater, root ->
-            ItemGenresFiltersLayoutBinding.inflate(
+            ItemTitleSectionLayoutBinding.inflate(
                 layoutInflater,
                 root,
                 false
@@ -20,29 +23,58 @@ fun genresFiltersAdapterDelegate() =
         }
     ) {
 
-        val adapter = GenresAdapter()
-        binding.genresFiltersRecyclerView.adapter = adapter
-
         bind {
-            adapter.setData(item.items)
+            binding.nameTitle.text = item.title
         }
     }
 
+fun genresFiltersAdapterDelegate(clickCallback: (Long, String, Boolean) -> Unit) =
+    adapterDelegateViewBinding<GenrePresentationModel, MoviesWithGenres, ItemGenreLayoutBinding>(
+        { layoutInflater, root ->
+            ItemGenreLayoutBinding.inflate(
+                layoutInflater,
+                root,
+                false
+            )
+        }
+    ) {
+
+        binding.root.setOnClickListener {
+            with(item) { clickCallback(id, name, isSelected) }
+        }
+
+        bind {
+            binding.genreNameTextView.text = item.name
+            if (item.isSelected) {
+                binding.genreNameTextView.setBackgroundResource(R.drawable.bg_genre_selected)
+            } else {
+                binding.genreNameTextView.setBackgroundResource(R.drawable.bg_genre)
+            }
+        }
+    }
+
+private const val BOTTOM_SPACE_GRID = 20
 fun moviesAdapterDelegate() =
-    adapterDelegateViewBinding<MoviePresentationModel, MoviesWithGenres, ItemMoviesListLayoutBinding>(
+    adapterDelegateViewBinding<MovieWrapperPresentationModel, MoviesWithGenres, ItemMoviesListLayoutBinding>(
         { layoutInflater, root ->
             ItemMoviesListLayoutBinding.inflate(
                 layoutInflater,
                 root,
                 false
-            )
+            ).apply {
+                moviesRecyclerView.addItemDecoration(
+                    MoviesGridSpacingItemDecoration(
+                        BOTTOM_SPACE_GRID
+                    )
+                )
+            }
         }
     ) {
 
-        val adapter = MoviesAdapter()
-        binding.moviesRecyclerView.adapter = adapter
+        val moviesAdapter = MoviesAdapter()
+        binding.moviesRecyclerView.adapter = moviesAdapter
 
         bind {
-            adapter.setData(item.items)
+            moviesAdapter.setData(item.items)
         }
     }

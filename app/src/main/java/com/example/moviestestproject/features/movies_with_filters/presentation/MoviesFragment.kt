@@ -1,39 +1,43 @@
 package com.example.moviestestproject.features.movies_with_filters.presentation
 
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.moviestestproject.R
 import com.example.moviestestproject.databinding.FragmentMoviesBinding
+import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate.MoviesWithFiltersListDelegationAdapter
 import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate.genresFiltersAdapterDelegate
 import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate.moviesAdapterDelegate
+import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate.titleSectionAdapterDelegate
 import com.example.moviestestproject.features.movies_with_filters.presentation.models.UiState
 import com.example.moviestestproject.features.movies_with_filters.presentation.mvp.MoviesPresenter
 import com.example.moviestestproject.features.movies_with_filters.presentation.mvp.MoviesView
-import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.example.moviestestproject.getAppComponent
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
+import javax.inject.Provider
 
-class MoviesFragment : MvpAppCompatFragment(), MoviesView {
+class MoviesFragment : MvpAppCompatFragment(R.layout.fragment_movies), MoviesView {
 
-    private var _binding: FragmentMoviesBinding? = null
-    private val binding get() = _binding!!
-    private val adapter = ListDelegationAdapter(
-        genresFiltersAdapterDelegate(),
+    private val binding: FragmentMoviesBinding by viewBinding()
+    private val adapter = MoviesWithFiltersListDelegationAdapter(
+        titleSectionAdapterDelegate(),
+        genresFiltersAdapterDelegate { id, name, isSelected ->
+            moviePresenter.clickGenreFilter(idGenre = id, nameGenre = name, isSelected = isSelected)
+        },
         moviesAdapterDelegate()
     )
 
-    private val moviePresenter by moxyPresenter { MoviesPresenter() }
+    @Inject
+    lateinit var presenterProvider: Provider<MoviesPresenter>
+    private val moviePresenter by moxyPresenter { presenterProvider.get() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMoviesBinding.inflate(inflater)
-        return super.onCreateView(inflater, container, savedInstanceState)
+    override fun onAttach(context: Context) {
+        getAppComponent().inject(this)
+        super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +51,7 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
     }
 
     override fun setData(uiState: UiState) {
-        adapter.items = uiState.moviesWithGenresFiltersList
+        adapter.items = uiState.content
     }
 
     override fun showLoading() {
@@ -59,12 +63,7 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
     }
 
     override fun showError(errorMessage: String) {
-        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
     }
 
     companion object {

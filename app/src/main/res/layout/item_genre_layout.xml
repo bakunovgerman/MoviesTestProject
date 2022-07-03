@@ -18,6 +18,8 @@
         android:paddingVertical="@dimen/genre_padding_vertical"
         android:textColor="@color/white"
         android:textSize="@dimen/genre_text_size"
-        android:background="@drawable/bg_genre"/>
+        android:background="@drawable/bg_genre"
+        android:layout_marginBottom="@dimen/spacer"
+        android:layout_marginStart="@dimen/spacer"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

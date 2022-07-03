@@ -6,13 +6,15 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviestestproject.R
 import com.example.moviestestproject.features.movies_with_filters.data.models.Movie
+import com.example.moviestestproject.features.movies_with_filters.domain.models.MovieDomain
 import com.example.moviestestproject.features.movies_with_filters.presentation.adapter.diffutils.MovieDiffCallback
+import com.example.moviestestproject.features.movies_with_filters.presentation.models.MoviePresentationModel
 
 class MoviesAdapter: RecyclerView.Adapter<MovieViewHolder>() {
 
     private val differ = AsyncListDiffer(this, MovieDiffCallback())
 
-    fun setData(items: List<Movie>) {
+    fun setData(items: List<MoviePresentationModel>) {
         differ.submitList(items)
     }
 

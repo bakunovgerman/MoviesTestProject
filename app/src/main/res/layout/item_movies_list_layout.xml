@@ -6,23 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/gray"
-        android:text="@string/movies"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:textSize="@dimen/title_text_size"
-        android:padding="@dimen/title_padding"
-        android:layout_marginBottom="@dimen/title_to_rv_margin_bottom"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moviesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/movies_rv_margin_horizontal"
         app:spanCount="2"
         tools:listitem="@layout/item_movie_layout"/>
 
