@@ -1,8 +1,10 @@
 package com.example.moviestestproject.core.utils
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import java.lang.RuntimeException
 
 private const val BODY_IS_NULL_ERROR = "Body is null error"
 

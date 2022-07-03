@@ -32,6 +32,7 @@ class MoviesPresenter @Inject constructor(
     }
 
     fun getMovies() {
+        viewState.showLoading()
         presenterScope.launch(Dispatchers.IO) {
             getMoviesUseCase().collect {
                 when (it) {

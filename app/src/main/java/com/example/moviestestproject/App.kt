@@ -13,6 +13,10 @@ class App : Application() {
         super.onCreate()
         appComponent = DaggerAppComponent.factory().create(context = applicationContext)
     }
+
+    companion object {
+        const val TAG = "MoviesApp"
+    }
 }
 
 fun Fragment.getAppComponent() = (requireActivity().application as App).appComponent

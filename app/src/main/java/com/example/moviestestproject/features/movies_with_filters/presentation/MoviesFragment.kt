@@ -47,6 +47,10 @@ class MoviesFragment : MvpAppCompatFragment(R.layout.fragment_movies), MoviesVie
 
     private fun initUi() {
         binding.recyclerView.adapter = adapter
+        binding.tryButton.setOnClickListener {
+            binding.errorLayout.visibility = View.GONE
+            moviePresenter.getMovies()
+        }
     }
 
     override fun setData(uiState: UiState) {
@@ -62,7 +66,7 @@ class MoviesFragment : MvpAppCompatFragment(R.layout.fragment_movies), MoviesVie
     }
 
     override fun showError(errorMessage: String) {
-        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+        binding.errorLayout.visibility = View.VISIBLE
     }
 
     companion object {

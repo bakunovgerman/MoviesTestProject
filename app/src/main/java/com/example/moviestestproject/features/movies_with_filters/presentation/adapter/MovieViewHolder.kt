@@ -14,7 +14,7 @@ class MovieViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     fun bind(item: MoviePresentationModel) = with(binding) {
         if (item.imageUrl != null) {
             imageNotFoundOrError.visibility = View.INVISIBLE
-            Glide.with(view.context).load(item.imageUrl).error(R.drawable.ic_error).into(moviePosterImageView)
+            Glide.with(view.context).load(item.imageUrl).error(R.drawable.ic_error_loading_image).into(moviePosterImageView)
         } else {
             imageNotFoundOrError.visibility = View.VISIBLE
             imageNotFoundOrError.text = view.context.getString(R.string.image_not_found)
