@@ -59,11 +59,13 @@ fun moviesAdapterDelegate(clickMovieCallback: (MoviePresentationModel) -> Unit) 
                 root,
                 false
             ).apply {
-                moviesRecyclerView.addItemDecoration(
-                    MoviesGridSpacingItemDecoration(
-                        BOTTOM_SPACE_GRID
+                moviesRecyclerView.apply {
+                    addItemDecoration(
+                        MoviesGridSpacingItemDecoration(
+                            BOTTOM_SPACE_GRID
+                        )
                     )
-                )
+                }
             }
         }
     ) {

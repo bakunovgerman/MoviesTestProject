@@ -19,7 +19,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/genre_text_size"
         android:background="@drawable/bg_genre"
-        android:layout_marginBottom="@dimen/spacer"
-        android:layout_marginStart="@dimen/spacer"/>
+        android:layout_marginBottom="@dimen/margin10dp"
+        android:layout_marginStart="@dimen/margin10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

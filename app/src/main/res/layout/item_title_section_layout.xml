@@ -19,6 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="@dimen/spacer"/>
+        android:layout_marginBottom="@dimen/margin10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

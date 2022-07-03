@@ -6,11 +6,16 @@
     <dimen name="genre_padding_vertical">10dp</dimen>
     <dimen name="genre_text_size">18sp</dimen>
     <dimen name="bg_genre_corners_radius">10dp</dimen>
-    <dimen name="movie_poster_size">150dp</dimen>
+    <dimen name="movie_poster_width">150dp</dimen>
+    <dimen name="movie_poster_height">180dp</dimen>
     <dimen name="movie_title_height">50dp</dimen>
     <dimen name="title_to_rv_margin_bottom">10dp</dimen>
     <dimen name="movies_rv_margin_horizontal">20dp</dimen>
-    <dimen name="spacer">10dp</dimen>
+    <dimen name="margin10dp">10dp</dimen>
     <dimen name="error_text_size">20sp</dimen>
     <dimen name="error_text_margin_top">20dp</dimen>
+    <dimen name="margin20dp">20dp</dimen>
+    <dimen name="text_size_normal">18sp</dimen>
+    <dimen name="movie_detail_poster_width">180dp</dimen>
+    <dimen name="movie_detail_poster_height">230dp</dimen>
 </resources>
