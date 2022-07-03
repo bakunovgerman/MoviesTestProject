@@ -43,7 +43,6 @@ class MoviesFragment : MvpAppCompatFragment(R.layout.fragment_movies), MoviesVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
-        moviePresenter.getMovies()
     }
 
     private fun initUi() {

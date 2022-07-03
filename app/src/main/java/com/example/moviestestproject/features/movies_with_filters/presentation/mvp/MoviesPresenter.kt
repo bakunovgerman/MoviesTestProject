@@ -26,6 +26,11 @@ class MoviesPresenter @Inject constructor(
     private var moviesList: List<MoviePresentationModel> = listOf()
     private var genresList: List<GenrePresentationModel> = listOf()
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        getMovies()
+    }
+
     fun getMovies() {
         presenterScope.launch(Dispatchers.IO) {
             getMoviesUseCase().collect {
