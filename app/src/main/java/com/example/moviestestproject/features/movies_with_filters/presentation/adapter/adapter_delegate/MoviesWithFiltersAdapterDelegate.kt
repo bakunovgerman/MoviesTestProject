@@ -1,5 +1,6 @@
 package com.example.moviestestproject.features.movies_with_filters.presentation.adapter.adapter_delegate
 
+import android.content.res.Configuration
 import com.example.moviestestproject.R
 import com.example.moviestestproject.databinding.ItemGenreLayoutBinding
 import com.example.moviestestproject.databinding.ItemMoviesListLayoutBinding
@@ -62,7 +63,11 @@ fun moviesAdapterDelegate(clickMovieCallback: (MoviePresentationModel) -> Unit) 
                 moviesRecyclerView.apply {
                     addItemDecoration(
                         MoviesGridSpacingItemDecoration(
-                            BOTTOM_SPACE_GRID
+                            bottom = BOTTOM_SPACE_GRID,
+                            gridSpanCount = when (resources.configuration.orientation) {
+                                Configuration.ORIENTATION_LANDSCAPE -> 4
+                                else -> 2
+                            }
                         )
                     )
                 }

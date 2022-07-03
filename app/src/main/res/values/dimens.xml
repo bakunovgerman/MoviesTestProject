@@ -17,5 +17,6 @@
     <dimen name="margin20dp">20dp</dimen>
     <dimen name="text_size_normal">18sp</dimen>
     <dimen name="movie_detail_poster_width">180dp</dimen>
-    <dimen name="movie_detail_poster_height">230dp</dimen>
+    <dimen name="movie_detail_poster_height">250dp</dimen>
+    <dimen name="text_width_movie_detail_land">200dp</dimen>
 </resources>
